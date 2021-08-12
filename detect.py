@@ -161,7 +161,8 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
             # Print time (inference + NMS)
-            print(f'{s}Done. ({t2 - t1:.3f}s)')
+            inference_and_nms_time = t2 - t1
+            print(f'{s}Done. ({inference_and_nms_time:.3f} s) ({1 / (inference_and_nms_time):.3f} FPS)')
 
             # Stream results
             if view_img:
