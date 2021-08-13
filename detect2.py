@@ -196,11 +196,9 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
     if update:
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
 
-    print(f'Done. ({time.time() - t0:.3f}s)')
+    print(f'Done. Total process time ({time.time() - t0:.3f}s)')
     print(f'Total inference + nms time ({total_inference_and_nms_time:.3f}s)')
-    print(f'total fotogramas {dataset.frames}', end='')
-    print(f'({1/(total_inference_and_nms_time/i):.3f}FPS)')
-    print(f'i = ({i}frames)')
+    print(f'Average inference + nms ({1/(total_inference_and_nms_time/dataset.frames):.3f}FPS)')
 
 
 def parse_opt():
