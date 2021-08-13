@@ -208,7 +208,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                  ['Full process', total_process_time, 's'],
                  ['inference + nms time', total_inference_and_nms_time, 's'],
                  ['Other processes', total_process_time - total_inference_and_nms_time, 's'],
-                 ['Average inference + nms', 1 / (total_inference_and_nms_time), 'FPS']]
+                 ['Average inference + nms', 1 / total_inference_and_nms_time, 'FPS']]
     print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
 
 
