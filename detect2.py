@@ -97,6 +97,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
     if pt and device.type != 'cpu':
         model(torch.zeros(1, 3, imgsz, imgsz).to(device).type_as(next(model.parameters())))  # run once
     t0 = time.time()
+    total_inference_and_nms_time = 0
     for path, img, im0s, vid_cap in dataset:
         if pt:
             img = torch.from_numpy(img).to(device)
@@ -163,7 +164,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
             # Print time (inference + NMS)
             inference_and_nms_time = t2 - t1
             print(f'{s}Done. ({inference_and_nms_time:.3f} s) ({1 / (inference_and_nms_time):.3f} FPS)')
-
+            total_inference_and_nms_time += inference_and_nms_time
             # Stream results
             if view_img:
                 cv2.imshow(str(p), im0)
@@ -196,6 +197,9 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
 
     print(f'Done. ({time.time() - t0:.3f}s)')
+    print(f'Total inference + nms time ({total_inference_and_nms_time:.3f}s)')
+    print(f'({1/(total_inference_and_nms_time/i):.3f}FPS)')
+    print(f'i = ({i}frames)')
 
 
 def parse_opt():
