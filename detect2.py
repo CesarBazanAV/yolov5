@@ -91,6 +91,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
     else:
         dataset = LoadImages(source, img_size=imgsz, stride=stride)
         bs = 1  # batch_size
+    print(f'total fotogramas {dataset.nf}', end='')
     vid_path, vid_writer = [None] * bs, [None] * bs
 
     # Run inference
