@@ -2,6 +2,7 @@
 # from PIL import ImageDraw
 import argparse
 import easyocr
+import time
 
 from utils.general import colorstr
 
@@ -20,9 +21,11 @@ def detect(source='data/images'):
     table = [['Activity', 'Time', 'Unit'],
              ['OCR detection', total_process_time, 's'],
              ['Average detection', 1/total_process_time, 'FPS']]
-    print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
+
     for bound in bounds:
         print(bound)
+
+    print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
 
 
 def parse_opt():
