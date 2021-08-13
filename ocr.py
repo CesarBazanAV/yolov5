@@ -13,8 +13,14 @@ def load_model():
 
 
 def detect(source='data/images'):
+    print(f"OCR active")
+    t0 = time.time()
     bounds = reader.readtext(source)
-    print(f"Bounds: {bounds}")
+    t1 = time_sync()
+    table = [['Activity', 'Time', 'Unit'],
+             ['OCR detection', total_process_time, 's'],
+             ['Average detection', 1/total_process_time, 'FPS']]
+    print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
     for bound in bounds:
         print(bound)
 
