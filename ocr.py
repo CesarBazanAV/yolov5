@@ -5,6 +5,7 @@ import easyocr
 
 from utils.general import colorstr
 
+
 def run(source='data/images'  # file/dir/URL/glob, 0 for webcam
         ):
     bounds = reader.readtext(source)
@@ -14,6 +15,7 @@ def run(source='data/images'  # file/dir/URL/glob, 0 for webcam
 
 
 def load_model():
+    print(f"Loading easyocr model")
     reader = easyocr.Reader(['es', 'en'])  # need to run only once to load model into memory
 
 
@@ -27,6 +29,7 @@ def parse_opt():
 def main(opt):
     print(colorstr('detect: ') + ', '.join(f'{k}={v}' for k, v in vars(opt).items()))
     # check_requirements(exclude=('tensorboard', 'thop'))
+    load_model()
     run(**vars(opt))
 
 
