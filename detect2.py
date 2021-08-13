@@ -202,6 +202,9 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
     print(f'Other processes ({total_process_time - total_inference_and_nms_time:.3f}s)')
     print(f'Average inference + nms ({1/(total_inference_and_nms_time/dataset.frames):.3f}FPS)')
 
+    table = [['Activity', 'Time', 'Unit'], ['Full process', '{total_process_time:.3f}', 's'], ['inference + nms time', '{total_inference_and_nms_time:.3f}', 's'], ['Other processes', '{total_process_time - total_inference_and_nms_time:.3f}', 's'], ['Average inference + nms', '{1/(total_inference_and_nms_time/dataset.frames):.3f}', 'FPS']]
+    print(tabulate(table, headers='firstrow', tablefmt='fancy_grid'))
+
 
 def parse_opt():
     parser = argparse.ArgumentParser()
