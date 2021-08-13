@@ -1,5 +1,6 @@
 # import PIL
 # from PIL import ImageDraw
+import argparse
 import easyocr
 
 
