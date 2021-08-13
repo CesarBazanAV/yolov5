@@ -6,7 +6,7 @@ import time
 
 from utils.general import colorstr
 from utils.torch_utils import time_sync
-
+from tabulate import tabulate
 
 def load_model():
     print(f"Loading easyocr model")
@@ -18,7 +18,8 @@ def detect(source='data/images'):
     print(f"OCR active")
     t0 = time.time()
     bounds = reader.readtext(source)
-    t1 = time_sync()
+    t1 = time.time()
+    total_process_time = t1 - t0
     table = [['Activity', 'Time', 'Unit'],
              ['OCR detection', total_process_time, 's'],
              ['Average detection', 1/total_process_time, 'FPS']]
