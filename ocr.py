@@ -12,7 +12,7 @@ def load_model():
     return reader
 
 
-def detect(source=data/images):
+def detect(source='data/images'):
     bounds = reader.readtext(source)
     print(f"Bounds: {bounds}")
     for bound in bounds:
