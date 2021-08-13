@@ -197,17 +197,18 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
 
     total_process_time = time.time() - t0
-
-    #table = [['Activity', 'Time', 'Unit'],
-    #         ['Full process', '{:.{}f}'.format(total_process_time, 3), 's'],
-    #         ['inference + nms time', '{:.{}f}'.format(total_inference_and_nms_time, 3), 's'],
-    #         ['Other processes', '{:.{}f}'.format(total_process_time - total_inference_and_nms_time, 3), 's'],
-    #         ['Average inference + nms', '{:.{}f}'.format(1/(total_inference_and_nms_time/dataset.frames), 3), 'FPS']]
-    table = [['Activity', 'Time', 'Unit'],
-             ['Full process', total_process_time, 's'],
-             ['inference + nms time', total_inference_and_nms_time, 's'],
-             ['Other processes', total_process_time - total_inference_and_nms_time, 's'],
-             ['Average inference + nms', 1/(total_inference_and_nms_time/dataset.frames), 'FPS']]
+    if hasattr(dataset, 'frames'):
+        table = [['Activity', 'Time', 'Unit'],
+                 ['Full process', total_process_time, 's'],
+                 ['inference + nms time', total_inference_and_nms_time, 's'],
+                 ['Other processes', total_process_time - total_inference_and_nms_time, 's'],
+                 ['Average inference + nms', 1/(total_inference_and_nms_time/dataset.frames), 'FPS']]
+    else:
+        table = [['Activity', 'Time', 'Unit'],
+                 ['Full process', total_process_time, 's'],
+                 ['inference + nms time', total_inference_and_nms_time, 's'],
+                 ['Other processes', total_process_time - total_inference_and_nms_time, 's'],
+                 ['Average inference + nms', 1 / (total_inference_and_nms_time), 'FPS']]
     print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
 
 
