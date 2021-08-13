@@ -5,8 +5,6 @@ import easyocr
 
 from utils.general import colorstr
 
-reader = load_model()
-
 
 def load_model():
     print(f"Loading easyocr model")
@@ -33,6 +31,8 @@ def main(opt):
     # check_requirements(exclude=('tensorboard', 'thop'))
     detect(**vars(opt))
 
+
+reader = load_model()
 
 if __name__ == "__main__":
     opt = parse_opt()
