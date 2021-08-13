@@ -202,7 +202,11 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
     print(f'Other processes ({total_process_time - total_inference_and_nms_time:.3f}s)')
     print(f'Average inference + nms ({1/(total_inference_and_nms_time/dataset.frames):.3f}FPS)')
 
-    table = [['Activity', 'Time', 'Unit'], ['Full process', '{total_process_time:.3f}', 's'], ['inference + nms time', '{total_inference_and_nms_time:.3f}', 's'], ['Other processes', '{total_process_time - total_inference_and_nms_time:.3f}', 's'], ['Average inference + nms', '{1/(total_inference_and_nms_time/dataset.frames):.3f}', 'FPS']]
+    table = [['Activity', 'Time', 'Unit'],
+             ['Full process', '{:.{}f}'.format(total_process_time, 3), 's'],
+             ['inference + nms time', '{:.{}f}'.format(total_inference_and_nms_time, 3), 's'],
+             ['Other processes', '{:.{}f}'.format(total_process_time - total_inference_and_nms_time, 3), 's'],
+             ['Average inference + nms', '{:.{}f}'.format(1/(total_inference_and_nms_time/dataset.frames), 3), 'FPS']]
     print(tabulate(table, headers='firstrow', tablefmt='fancy_grid'))
 
 
