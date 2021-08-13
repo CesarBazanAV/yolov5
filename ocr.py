@@ -12,7 +12,7 @@ def load_model():
     return reader
 
 
-def detect(self, reader):
+def detect(source=data/images):
     bounds = reader.readtext(source)
     print(f"Bounds: {bounds}")
     for bound in bounds:
@@ -29,7 +29,8 @@ def parse_opt():
 def main(opt):
     print(colorstr('detect: ') + ', '.join(f'{k}={v}' for k, v in vars(opt).items()))
     # check_requirements(exclude=('tensorboard', 'thop'))
-    detect(**vars(opt), reader=load_model())
+    reader = load_model()
+    detect(**vars(opt))
 
 
 if __name__ == "__main__":
