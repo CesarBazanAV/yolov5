@@ -3,6 +3,7 @@
 import argparse
 import easyocr
 
+from utils.general import colorstr
 
 def run(source='data/images'  # file/dir/URL/glob, 0 for webcam
         ):
