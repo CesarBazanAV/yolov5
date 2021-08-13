@@ -2,15 +2,11 @@
 # from PIL import ImageDraw
 import easyocr
 
-imageLocation = 'datasets/TrafficPanels/images/IMG_4824.JPG'
-
-for bound in bounds:
-    print(bound)
-
 
 def run(source='data/images'  # file/dir/URL/glob, 0 for webcam
         ):
     bounds = reader.readtext(source)
+    print(f"Bounds: {bounds}")
     for bound in bounds:
         print(bound)
 
