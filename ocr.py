@@ -5,6 +5,7 @@ import easyocr
 import time
 
 from utils.general import colorstr
+from utils.torch_utils import time_sync
 
 
 def load_model():
