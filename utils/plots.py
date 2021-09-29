@@ -71,10 +71,10 @@ def plot_one_box(x, im, color=(128, 128, 128), label=None, line_thickness=3):
     tl = line_thickness or round(0.002 * (im.shape[0] + im.shape[1]) / 2) + 1  # line/font thickness
     c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
     cv2.rectangle(im, c1, c2, color, thickness=tl, lineType=cv2.LINE_AA)
-    eje_x = c2[1] - c1[0]
-    eje_y = c2[1] - c1[0]
-    area = eje_x * eje_y
-    label = "X: " + str(eje_x) + " Y: " + str(eje_y) + " A: " + str(area)
+    #eje_x = c2[1] - c1[0]
+    #eje_y = c2[1] - c1[0]
+    #area = eje_x * eje_y
+    #label = "X: " + str(eje_x) + " Y: " + str(eje_y) + " A: " + str(area)
     if label:
         tf = max(tl - 1, 1)  # font thickness
         t_size = cv2.getTextSize(label, 0, fontScale=tl / 3, thickness=tf)[0]
