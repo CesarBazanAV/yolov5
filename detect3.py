@@ -212,7 +212,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                 print(f'Y: {y1}')
                 print(f'img.area: {img_area}')
                 print(f'AreaDetection: {area}')
-                print(f'AreaDetection: {area * 100 / img_area}%')
+                print(f'percentage: {area * 100 / img_area:.3f}%')
 
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
                 print(f'det_scaled: {det[:, :4]}')
