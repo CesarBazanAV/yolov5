@@ -202,6 +202,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                 x1 = p2[0] - p1[0]
                 y1 = p2[1] - p1[1]
                 area = x1 * y1
+                print(f'\ndet: {det[:, :4]}')
                 print(f'\np1: {p1},')
                 print(f'p2: {p2}')
                 print(f'X: {x1}')
@@ -209,7 +210,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                 print(f'Area: {area}')
 
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
-                print(f'det: {det[:, :4]}')
+                print(f'det_scaled: {det[:, :4]}')
 
                 # Print results
                 for c in det[:, -1].unique():
