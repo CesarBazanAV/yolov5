@@ -198,6 +198,8 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                 print(f'\nimg.shape: {img.shape[2:]},\ndet: {det[:, :4]},\nim0.shape: {im0.shape}')
 # 286,720
 # 19,041
+                for *xyxy, conf, cls in reversed(det):
+                    print(f'xyxy: {xyxy}')
                 p1 = det[0, :2]
                 p2 = det[0, 2:4]
                 x1 = p2[0] - p1[0]
@@ -216,6 +218,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
 
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
                 print(f'det_scaled: {det[:, :4]}')
+
 
                 # Print results
                 for c in det[:, -1].unique():
