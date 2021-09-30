@@ -202,7 +202,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                 x1 = p2[0] - p1[0]
                 y1 = p2[1] - p1[1]
                 area = x1 * y1
-                print(f'p1: {p1},')
+                print(f'\np1: {p1},')
                 print(f'p2: {p2}')
                 print(f'X: {x1}')
                 print(f'Y: {y1}')
