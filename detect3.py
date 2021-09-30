@@ -195,34 +195,26 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
             annotator = Annotator(im0, line_width=line_thickness, example=str(names))
             if len(det):
                 # Rescale boxes from img_size to im0 size
-                print(f'\nimg.shape: {img.shape[2:]},\ndet: {det[:, :4]},\nim0.shape: {im0.shape}')
-# 286,720
-# 19,041
-                for *xyxy, conf, cls in reversed(det):
-                    print(f'xyxy: {xyxy}')
-                    p11, p22 = (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3]))
-                    print(f'p11: {p11}')
-                    print(f'p22: {p22}')
+                # print(f'\nimg.shape: {img.shape[2:]},\ndet: {det[:, :4]},\nim0.shape: {im0.shape}')
 
-                p1 = det[0, :2]
-                p2 = det[0, 2:4]
-                x1 = p2[0] - p1[0]
-                y1 = p2[1] - p1[1]
                 img_area = img.shape[2] * img.shape[3]
-                area = x1 * y1
-                print(f'\ndet: {det[:, :4]}')
-                print(f'\nimg.shape: {img.shape[2:]}')
-                print(f'\np1: {p1},')
-                print(f'p2: {p2}')
-                print(f'X: {x1}')
-                print(f'Y: {y1}')
-                print(f'img.area: {img_area}')
-                print(f'AreaDetection: {area}')
-                print(f'percentage: {area * 100 / img_area:.3f}%')
+                for *xyxy, conf, cls in reversed(det):
+                    # print(f'xyxy: {xyxy}')
+                    p1, p2 = (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3]))
+                    x = p2[0] - p1[0]
+                    y = p2[1] - p1[1]
+                    area = x * y
+                    print(f'\noriginal.shape: {img.shape[2:]}')
+                    print(f'original.area: {img_area}')
+                    print(f'detection.p1: {p1}')
+                    print(f'detection.p2: {p2}')
+                    print(f'detection.X: {x1}')
+                    print(f'detection.Y: {y1}')
+                    print(f'detection.area: {area}')
+                    print(f'percentage: {area * 100 / img_area:.3f}%')
 
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
                 print(f'det_scaled: {det[:, :4]}')
-
 
                 # Print results
                 for c in det[:, -1].unique():
