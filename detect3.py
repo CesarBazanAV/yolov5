@@ -196,6 +196,8 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
             if len(det):
                 # Rescale boxes from img_size to im0 size
                 print(f'\nimg.shape: {img.shape[2:]},\ndet: {det[:, :4]},\nim0.shape: {im0.shape}')
+                print(f'det: {det[0, :4]}')
+                print(f'det: {det[1, :4]}')
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
                 print(f'det: {det[:, :4]}')
 
