@@ -247,10 +247,13 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
     print(f'Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}' % t)
-    print(f'Speed: %.1fms' % t[0])
-    print(f'Speed: %.1fms' % t[1])
-    print(f'Speed: %.1fms' % t[2])
-    print(f'Speed: %.1fms' % t[3])
+
+    table = [['Activity', 'Time', 'Unit'],
+             ['Pre-process', t[0], 'ms'],
+             ['inference', t[1], 'ms'],
+             ['NMS per image at shape', t[2], 'ms']]
+    print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
+
     if save_txt or save_img:
         s = f"\n{len(list(save_dir.glob('labels/*.txt')))} labels saved to {save_dir / 'labels'}" if save_txt else ''
         print(f"Results saved to {colorstr('bold', save_dir)}{s}")
