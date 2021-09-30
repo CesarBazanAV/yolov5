@@ -98,10 +98,10 @@ class Annotator:
                 x = p2[0] - p1[0]
                 y = p2[1] - p1[1]
                 area = x * y
-                print(f'\nbox: {box}')
-                print(f'p1: {p1}')
-                print(f'p2: {p2}')
-                print(f'x: {x}, y: {y}, a: {area}')
+                # print(f'\nbox: {box}')
+                # print(f'p1: {p1}')
+                # print(f'p2: {p2}')
+                # print(f'x: {x}, y: {y}, a: {area}')
 
                 label += " X: " + str(x) + ", Y: " + str(y) + ", A: " + str(area)
                 label += " X: " + str(x) + ", Y: " + str(y) + ", A: " + str(area)
