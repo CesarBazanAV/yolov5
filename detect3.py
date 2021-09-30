@@ -200,6 +200,10 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
 # 19,041
                 for *xyxy, conf, cls in reversed(det):
                     print(f'xyxy: {xyxy}')
+                    p11, p22 = (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3]))
+                    print(f'p11: {p11}')
+                    print(f'p22: {p22}')
+
                 p1 = det[0, :2]
                 p2 = det[0, 2:4]
                 x1 = p2[0] - p1[0]
