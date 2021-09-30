@@ -205,7 +205,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                 area = x1 * y1
                 print(f'\ndet: {det[:, :4]}')
                 print(f'\nimg.shape: {img.shape[2:]}')
-                print(f'\nimg.area: {img.shape[3] * img.shape[4]}')
+                print(f'\nimg.area: {img.shape[2] * img.shape[3]}')
                 print(f'\np1: {p1},')
                 print(f'p2: {p2}')
                 print(f'X: {x1}')
