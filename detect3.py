@@ -254,7 +254,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
              ['Inference', t[1], 'ms'],
              ['NMS', t[2], 'ms'],
              ['NMS + inference', t[2] + t[1], 'ms'],
-             ['Average inference + nms', 1/(t[2] + t[1])*1000, 'FPS']]
+             ['Average inference + nms', 1000/(t[2] + t[1]), 'FPS']]
     print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
 
     if save_txt or save_img:
