@@ -95,16 +95,16 @@ class Annotator:
             p1, p2 = (int(box[0]), int(box[1])), (int(box[2]), int(box[3]))
             cv2.rectangle(self.im, p1, p2, color, thickness=self.lw, lineType=cv2.LINE_AA)
             if label:
-                x = p2[0] - p1[0]
-                y = p2[1] - p1[1]
-                area = x * y
+                # x = p2[0] - p1[0]
+                # y = p2[1] - p1[1]
+                # area = x * y
                 # print(f'\nbox: {box}')
                 # print(f'p1: {p1}')
                 # print(f'p2: {p2}')
                 # print(f'x: {x}, y: {y}, a: {area}')
 
-                label += " X: " + str(x) + ", Y: " + str(y) + ", A: " + str(area)
-                label += " X: " + str(x) + ", Y: " + str(y) + ", A: " + str(area)
+                # label += " X: " + str(x) + ", Y: " + str(y) + ", A: " + str(area)
+                # label += " X: " + str(x) + ", Y: " + str(y) + ", A: " + str(area)
                 tf = max(self.lw - 1, 1)  # font thickness
                 w, h = cv2.getTextSize(label, 0, fontScale=self.lw / 3, thickness=tf)[0]  # text width, height
                 outside = p1[1] - h - 3 >= 0  # label fits outside box
