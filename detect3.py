@@ -204,14 +204,17 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                     x = p2[0] - p1[0]
                     y = p2[1] - p1[1]
                     area = x * y
-                    print(f'\noriginal.shape: {img.shape[2:]}')
-                    print(f'original.area: {img_area}')
-                    print(f'detection.p1: {p1}')
-                    print(f'detection.p2: {p2}')
-                    print(f'detection.X: {x}')
-                    print(f'detection.Y: {y}')
-                    print(f'detection.area: {area}')
-                    print(f'percentage: {area * 100 / img_area:.3f}%')
+                    percentage = area * 100 / img_area
+                    print(f'\n')
+                    # print(f'original.shape: {img.shape[2:]}')
+                    # print(f'original.area: {img_area}')
+                    # print(f'detection.p1: {p1}')
+                    # print(f'detection.p2: {p2}')
+                    # print(f'detection.X: {x}')
+                    # print(f'detection.Y: {y}')
+                    # print(f'detection.area: {area}')
+
+                    print(f'percentage: {percentage:.3f}%')
 
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
                 print(f'det_scaled: {det[:, :4]}')
@@ -231,7 +234,13 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
 
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
-                        label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
+                        p1, p2 = (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3]))
+                        x = p2[0] - p1[0]
+                        y = p2[1] - p1[1]
+                        area = x * y
+                        percentage = area * 100 / img_area
+                        label = None if hide_labels else (names[c] if hide_conf else f"{names[c]} {conf:.2f} A: {area:,} P: {percentage:.3f}%")
+                        # label = "A: {:,}  P: {:.3f}% ".format(area, percentage)
                         annotator.box_label(xyxy, label, color=colors(c, True))
                         if save_crop:
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
