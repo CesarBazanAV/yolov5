@@ -208,11 +208,11 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                     print(f'\n')
                     # print(f'original.shape: {img.shape[2:]}')
                     # print(f'original.area: {img_area}')
-                    # print(f'detection.p1: {p1}')
-                    # print(f'detection.p2: {p2}')
+                    print(f'detection.p1: {p1}')
+                    print(f'detection.p2: {p2}')
                     # print(f'detection.X: {x}')
                     # print(f'detection.Y: {y}')
-                    # print(f'detection.area: {area}')
+                    print(f'detection.area: {area}')
 
                     print(f'percentage: {percentage:.3f}%')
 
@@ -239,6 +239,10 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                         y = p2[1] - p1[1]
                         area = x * y
                         percentage = area * 100 / img_area
+                        print(f'save.detection.p1: {p1}')
+                        print(f'save.detection.p2: {p2}')
+                        print(f'save.detection.area: {area}')
+                        print(f'save.percentage: {percentage:.3f}%')
                         label = None if hide_labels else (names[c] if hide_conf else f"{names[c]} {conf:.2f} A: {area:,} P: {percentage:.3f}%")
                         # label = "A: {:,}  P: {:.3f}% ".format(area, percentage)
                         annotator.box_label(xyxy, label, color=colors(c, True))
