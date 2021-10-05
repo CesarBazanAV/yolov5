@@ -215,7 +215,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                     # print(f'detection.area: {area}')
 
                     # print(f'percentage: {percentage:.3f}%')
-                    print(f'detection p1: {p1} p2: {p2} area: {area} percentage: {percentage:.3f}%')
+                    print(f'detection p1: {p1} p2: {p2} area: {area:,} percentage: {percentage:.3f}%')
                 # print(f'det_scaled: {det}')
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
                 # print(f'det_scaled: {det[:, :4]}')
@@ -241,9 +241,10 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                         y = p2[1] - p1[1]
                         area = x * y
                         percentage = area * 100 / img_area
-                        print(f'save.detection.p1: {p1}')
-                        print(f'save.detection.p2: {p2}')
-                        print(f'save.detection.area: {area}')
+                        # print(f'save.detection.p1: {p1}')
+                        # print(f'save.detection.p2: {p2}')
+                        # print(f'save.detection.area: {area}')
+                        print(f'save.detection p1: {p1} p2: {p2} area: {area:,}')
                         # print(f'save.percentage: {percentage:.3f}%')
                         label = None if hide_labels else (names[c] if hide_conf else f"{names[c]} {conf:.2f} A: {area:,}")
                         # label = "A: {:,}  P: {:.3f}% ".format(area, percentage)
