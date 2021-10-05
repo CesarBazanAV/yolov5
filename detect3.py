@@ -215,9 +215,10 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                     print(f'detection.area: {area}')
 
                     print(f'percentage: {percentage:.3f}%')
-
+                print(f'det_scaled: {det}')
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
-                print(f'det_scaled: {det[:, :4]}')
+                # print(f'det_scaled: {det[:, :4]}')
+                print(f'det_scaled: {det}')
 
                 # Print results
                 for c in det[:, -1].unique():
