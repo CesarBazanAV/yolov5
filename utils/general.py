@@ -12,7 +12,6 @@ import platform
 import random
 import re
 import signal
-import time
 import urllib
 from itertools import repeat
 from multiprocessing.pool import ThreadPool
@@ -31,6 +30,8 @@ import yaml
 from tabulate import tabulate
 from utils.downloads import gsutil_getsize
 from utils.metrics import box_iou, fitness
+from utils.torch_utils import time_sync
+
 
 # Settings
 torch.set_printoptions(linewidth=320, precision=5, profile='long')
@@ -805,10 +806,9 @@ def save_one_box(xyxy, im, file='image.jpg', gain=1.02, pad=10, square=False, BG
 
 def detect_one_box(ocr_reader, xyxy, im, file='image.jpg', gain=1.02, pad=10, square=False, BGR=False, save=True):
     crop = save_one_box(xyxy, im, file, BGR, save=False)
-    # t00 = time.time()
+    t00 = time_sync()
     bounds = ocr_reader.readtext(crop)
-    # t01 = time.time()
-    # total_process_time = t01 - t00
+    total_process_time = time_sync() - t00
     # table = [['Activity', 'Time', 'Unit'],
     #              ['OCR detection', total_process_time, 's'],
     #              ['Average detection', 1/total_process_time, 'FPS']]
@@ -816,6 +816,7 @@ def detect_one_box(ocr_reader, xyxy, im, file='image.jpg', gain=1.02, pad=10, sq
     #         print(bound)
     # print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
     # print("\n")
+    return total_process_time
 
 
 def increment_path(path, exist_ok=False, sep='', mkdir=False):
