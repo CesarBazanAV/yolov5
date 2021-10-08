@@ -253,7 +253,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                         # ocr_time += detect_one_box(ocr_reader, xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
                         if save_crop:
                             dt[3] += detect_one_box(ocr_reader, xyxy, imc,
-                                                    file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
+                                                    file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True, save=False)
                             ocr_det += 1
                             #save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
