@@ -28,6 +28,7 @@ import torch
 import torchvision
 import yaml
 
+from tabulate import tabulate
 from utils.downloads import gsutil_getsize
 from utils.metrics import box_iou, fitness
 
