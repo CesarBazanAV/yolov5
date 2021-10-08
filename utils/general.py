@@ -802,6 +802,21 @@ def save_one_box(xyxy, im, file='image.jpg', gain=1.02, pad=10, square=False, BG
     return crop
 
 
+def detect_one_box(ocr_reader, xyxy, im, file='image.jpg', gain=1.02, pad=10, square=False, BGR=False, save=True):
+    crop = save_one_box(xyxy, im, file, BGR, save=False)
+    t00 = time.time()
+    bounds = ocr_reader.readtext(crop)
+    t01 = time.time()
+    total_process_time = t01 - t00
+    table = [['Activity', 'Time', 'Unit'],
+             ['OCR detection', total_process_time, 's'],
+             ['Average detection', 1/total_process_time, 'FPS']]
+    for bound in bounds:
+        print(bound)
+    print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
+    print("\n")
+
+
 def increment_path(path, exist_ok=False, sep='', mkdir=False):
     # Increment file or directory path, i.e. runs/exp --> runs/exp{sep}2, runs/exp{sep}3, ... etc.
     path = Path(path)  # os-agnostic

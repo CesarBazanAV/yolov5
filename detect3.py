@@ -25,7 +25,7 @@ from models.experimental import attempt_load
 from utils.datasets import LoadImages, LoadStreams
 from utils.general import apply_classifier, check_img_size, check_imshow, check_requirements, check_suffix, colorstr, \
     increment_path, non_max_suppression, print_args, save_one_box, scale_coords, set_logging, \
-    strip_optimizer, xyxy2xywh
+    strip_optimizer, xyxy2xywh, detect_one_box
 from utils.plots import Annotator, colors
 from utils.torch_utils import load_classifier, select_device, time_sync
 from tabulate import tabulate
@@ -57,6 +57,9 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
         hide_conf=False,  # hide confidences
         half=False,  # use FP16 half-precision inference
         ):
+
+    print(f"Loading easyocr model")
+    ocr_reader = easyocr.Reader(['es'], gpu=True)
     source = str(source)
     save_img = not nosave and not source.endswith('.txt')  # save inference images
     webcam = source.isnumeric() or source.endswith('.txt') or source.lower().startswith(
@@ -249,6 +252,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                         label = None if hide_labels else (names[c] if hide_conf else f"{names[c]} {conf:.2f} A: {area:,}")
                         # label = "A: {:,}  P: {:.3f}% ".format(area, percentage)
                         annotator.box_label(xyxy, label, color=colors(c, True))
+                        detect_one_box(ocr_reader, xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
                         if save_crop:
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 

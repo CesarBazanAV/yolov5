@@ -11,8 +11,8 @@ from tabulate import tabulate
 
 def load_model():
     print(f"Loading easyocr model")
-    # reader = easyocr.Reader(['es', 'en'], gpu=True)  # need to run only once to load model into memory
     reader = easyocr.Reader(['es'], gpu=True)  # need to run only once to load model into memory
+    # reader = easyocr.Reader(['es', 'en'], gpu=True)  # need to run only once to load model into memory
     return reader
 
 
