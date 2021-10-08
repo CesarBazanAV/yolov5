@@ -294,8 +294,8 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
              ['NMS + inference', t[2] + t[1], 'ms'],
              ['Average inference + nms', 1000/(t[2] + t[1]), 'FPS'],
              ['OCR detections', ocr_det, ''],
-             ['OCR time', ocr_time, 'ms'],
-             ['OCR time average', ocr_time/ocr_det, 'ms'],
+             ['OCR time', ocr_time * 1E3, 'ms'],
+             ['OCR time average', ocr_time * 1E3/ocr_det, 'ms'],
              ['OCR FPS', 1/(ocr_time/ocr_det), 'FPS']]
     print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
 
