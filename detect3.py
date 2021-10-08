@@ -130,7 +130,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
     # Run inference
     if pt and device.type != 'cpu':
         model(torch.zeros(1, 3, *imgsz).to(device).type_as(next(model.parameters())))  # run once
-    dt, seen = [0.0, 0.0, 0.0], 0
+    dt, seen, ocr_time, ocr_det = [0.0, 0.0, 0.0], 0, 0, 0
     for path, img, im0s, vid_cap in dataset:
         t1 = time_sync()
         if onnx:
@@ -245,15 +245,15 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                         y = p2[1] - p1[1]
                         area = x * y
                         percentage = area * 100 / img_area
-                        # print(f'save.detection.p1: {p1}')
-                        # print(f'save.detection.p2: {p2}')
-                        # print(f'save.detection.area: {area}')
                         print(f'save.detection p1: {p1} p2: {p2} area: {area:,}')
                         # print(f'save.percentage: {percentage:.3f}%')
                         label = None if hide_labels else (names[c] if hide_conf else f"{names[c]} {conf:.2f} A: {area:,}")
                         # label = "A: {:,}  P: {:.3f}% ".format(area, percentage)
                         annotator.box_label(xyxy, label, color=colors(c, True))
+                        t4 = time_sync()
                         detect_one_box(ocr_reader, xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
+                        ocr_time += time_sync() - t4
+                        ocr_det += 1
                         if save_crop:
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
@@ -294,7 +294,11 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
              ['Inference', t[1], 'ms'],
              ['NMS', t[2], 'ms'],
              ['NMS + inference', t[2] + t[1], 'ms'],
-             ['Average inference + nms', 1000/(t[2] + t[1]), 'FPS']]
+             ['Average inference + nms', 1000/(t[2] + t[1]), 'FPS'],
+             ['OCR detections', ocr_det, ''],
+             ['OCR time', ocr_time, 'ms'],
+             ['OCR time average', ocr_time/ocr_det, 'ms'],
+             ['OCR FPS', 1000/(ocr_time/ocr_det), 'FPS']]
     print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
 
     if save_txt or save_img:
