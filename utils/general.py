@@ -799,6 +799,7 @@ def save_one_box(xyxy, im, file='image.jpg', gain=1.0, pad=0, square=False, BGR=
         b[:, 2:] = b[:, 2:].max(1)[0].unsqueeze(1)  # attempt rectangle to square
     b[:, 2:] = b[:, 2:] * gain + pad  # box wh * gain + pad
     xyxy = xywh2xyxy(b).long()
+    print(f'im.shape {im.shape}')
     clip_coords(xyxy, im.shape)
     crop = im[int(xyxy[0, 1]):int(xyxy[0, 3]), int(xyxy[0, 0]):int(xyxy[0, 2]), ::(1 if BGR else -1)]
     print(f'crop size {crop.shape}')
