@@ -14,6 +14,7 @@ import cv2
 import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
+import easyocr
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
