@@ -251,10 +251,11 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                         # label = "A: {:,}  P: {:.3f}% ".format(area, percentage)
                         annotator.box_label(xyxy, label, color=colors(c, True))
                         # ocr_time += detect_one_box(ocr_reader, xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
-                        dt[3] += detect_one_box(ocr_reader, xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
-                        ocr_det += 1
                         if save_crop:
-                            save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
+                            dt[3] += detect_one_box(ocr_reader, xyxy, imc,
+                                                    file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
+                            ocr_det += 1
+                            #save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
             # Print time (inference-only)
             print(f'{s}Done. ({t3 - t2:.3f}s)')

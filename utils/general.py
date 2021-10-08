@@ -807,7 +807,7 @@ def save_one_box(xyxy, im, file='image.jpg', gain=1.02, pad=10, square=False, BG
 
 
 def detect_one_box(ocr_reader, xyxy, im, file='image.jpg', gain=1.02, pad=10, square=False, BGR=False, save=True):
-    crop = save_one_box(xyxy, im, file, BGR=True, save=True)
+    crop = save_one_box(xyxy, im, file, BGR, save)
     t00 = time_sync()
     bounds = ocr_reader.readtext(crop)
     total_process_time = time_sync() - t00
