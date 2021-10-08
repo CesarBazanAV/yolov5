@@ -296,7 +296,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
              ['OCR detections', ocr_det, ''],
              ['OCR time', ocr_time, 'ms'],
              ['OCR time average', ocr_time/ocr_det, 'ms'],
-             ['OCR FPS', 1000/(ocr_time/ocr_det), 'FPS']]
+             ['OCR FPS', 1/(ocr_time/ocr_det), 'FPS']]
     print(tabulate(table, headers='firstrow', tablefmt='fancy_grid', floatfmt=".3f"))
 
     if save_txt or save_img:
