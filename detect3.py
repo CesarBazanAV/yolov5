@@ -285,9 +285,9 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                     vid_writer[i].write(im0)
 
     # Print results
-    print("dt: "+dt)
+    print(f'dt: {dt}')
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
-    print("t: " + t)
+    print(f't: {t}')
     print(f'Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS, OCR time %.fms per image at shape {(1, 3, *imgsz)}' % t)
     table = [['Activity', 'Time', 'Unit'],
              ['Pre-process', t[0], 'ms'],
