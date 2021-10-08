@@ -13,6 +13,7 @@ import random
 import re
 import signal
 import urllib
+import time
 from itertools import repeat
 from multiprocessing.pool import ThreadPool
 from pathlib import Path
